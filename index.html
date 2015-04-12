@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+  	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+<body ng-controller="vizController">
+
+    <div class="form-group col-sm-4">
+        <label for="groupFilter">Filter by Theme</label>
+            <ui-select id="groupFilter" multiple ng-model="groups" theme="select2" style="width: 300px;" >
+                <ui-select-match placeholder="Select groups...">{{$item}}</ui-select-match>
+                <ui-select-choices repeat="group in groups | filter:$select.search">
+                  {{group}}
+                </ui-select-choices>
+            </ui-select>
+    </div>
+
+    <user-graph data="data"></user-graph>
+
+
+    <!-- Angular scripts-->
+    <script src="assets/js/angular.js"></script>
+
+    <!-- D3.js-->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+
+    <!-- angular bootstrap -->
+    <script src="assets/js/ui-bootstrap-tpls-0.12.1.min.js"></script>
+
+    <!-- select ui -->
+    <script src="assets/js/select.js"></script>
+
+    <script src="app/app.js"></script>
+    <script src="app/directives.js"></script>
+    <script src="app/services.js"></script>
+    <script src="app/controllers.js"></script>
+</body>
+
+</html>
