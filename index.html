@@ -10,14 +10,15 @@
 <body ng-controller="vizController">
 
     <div class="form-group col-sm-4">
-        <label for="groupFilter">Filter by Theme</label>
-            <ui-select id="groupFilter" multiple ng-model="groups" theme="select2" style="width: 300px;" >
+        <label for="groupFilter">Include Groups: </label>
+            <ui-select id="groupFilter" multiple ng-model="params.groups" theme="select2" style="width: 300px;" ng-click="updateData()">
                 <ui-select-match placeholder="Select groups...">{{$item}}</ui-select-match>
-                <ui-select-choices repeat="group in groups | filter:$select.search">
+                <ui-select-choices repeat="group in params.availableGroups | filter:$select.search">
                   {{group}}
                 </ui-select-choices>
             </ui-select>
     </div>
+    {{params.groups}}
 
     <user-graph data="data"></user-graph>
 
@@ -31,7 +32,7 @@
     <!-- angular bootstrap -->
     <script src="assets/js/ui-bootstrap-tpls-0.12.1.min.js"></script>
 
-    <!-- select ui -->
+    <!-- ui select -->
     <script src="assets/js/select.js"></script>
 
     <script src="app/app.js"></script>

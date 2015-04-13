@@ -1,5 +1,6 @@
 (function() {
 
+
     var userGraph = function(){
         function link(scope, element, attributes){
 
@@ -10,20 +11,27 @@
             //Set up the colour scale
             var color = d3.scale.category20();
 
-            //Set up the force layout
-            var force = d3.layout.force()
-                .charge(-120)
-                .linkDistance(30)
-                .size([width, height]);
+
 
             //Append a SVG to the body of the html page. Assign this SVG as an object to svg
-            var svg = d3.select(element[0]).append("svg")
-                .attr("width", width)
-                .attr("height", height);
+
 
             //Create the graph data structure out of the data object on the scope, once it is assigned by the controller
             scope.$watch('data', function(graph) {
-                //if (typeof graph !== "undefined") {
+                if (typeof graph !== "undefined") {
+
+                d3.select("#userGraph").remove();
+                var svg = d3.select(element[0]).append("svg")
+                    .attr("id", "userGraph")
+                    .attr("width", width)
+                    .attr("height", height);
+
+                    //Set up the force layout
+                    var force = d3.layout.force()
+                        .charge(-120)
+                        .linkDistance(30)
+                        .size([width, height]);
+
                     force.nodes(graph.nodes)
                         .links(graph.links)
                         .start();
@@ -60,7 +68,7 @@
                         node.attr("cx", function(d) { return d.x; })
                             .attr("cy", function(d) { return d.y; });
                       });
-                //}
+                }
             });
 
 
