@@ -1,4 +1,4 @@
-# Syria-Twitter-Data
+# Syria-Twitter-FrontEnd
 
 This is a front-end repository for a team project for class W205 - Storing and Retrieving Data - in the Master of Information and Data Science program at UC Berkeley's School of Information
 
