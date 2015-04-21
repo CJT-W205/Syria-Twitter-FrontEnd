@@ -9,24 +9,26 @@
 
 <body ng-controller="vizController">
 
-    <div class="form-group col-sm-4">
-        <label for="groupFilter">Include Groups: </label>
-            <ui-select id="groupFilter" multiple ng-model="params.groups" theme="select2" style="width: 300px;" ng-click="updateData()">
-                <ui-select-match placeholder="Select groups...">{{$item}}</ui-select-match>
-                <ui-select-choices repeat="group in params.availableGroups | filter:$select.search">
-                  {{group}}
-                </ui-select-choices>
-            </ui-select>
-    </div>
+    <!--<div class="form-group col-sm-4">-->
+        <!--<label for="groupFilter">Include Groups: </label>-->
+            <!--<ui-select id="groupFilter" multiple ng-model="params.groups" theme="select2" style="width: 300px;" ng-click="updateData()">-->
+                <!--<ui-select-match placeholder="Select groups...">{{$item}}</ui-select-match>-->
+                <!--<ui-select-choices repeat="group in params.availableGroups | filter:$select.search">-->
+                  <!--{{group}}-->
+                <!--</ui-select-choices>-->
+            <!--</ui-select>-->
+    <!--</div>-->
 
-    <user-graph data="data"></user-graph>
+
+    <sigma-graph graph="graph" width="100%" height="800px"></sigma-graph>
+    <!--<user-graph data="data"></user-graph>-->
 
 
     <!-- Angular scripts-->
     <script src="assets/js/angular.js"></script>
 
-    <!-- D3.js-->
-    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <!-- sigma.js-->
+    <script src="assets/js/sigma.min.js"></script>
 
     <!-- angular bootstrap -->
     <script src="assets/js/ui-bootstrap-tpls-0.12.1.min.js"></script>
