@@ -1,7 +1,8 @@
 (function() {
     var SyriaTwitterAPI = function($http) {
 
-        var server_url = 'http://127.0.0.1:5000';
+        var servers = {'local': 'http://127.0.0.1:5000', 'production': 'http://169.53.140.164:8000'};
+        var server_url = servers.production;
 
         var factory = {};
         factory.graphGroups = function() {

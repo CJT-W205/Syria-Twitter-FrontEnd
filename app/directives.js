@@ -13,8 +13,6 @@
             var s = new sigma({
                 container: divId,
                 settings: {
-                    defaultNodeColor: '#ec5148',
-                    scalingMode: 'outside',
                     maxNodeSize:3,
                     minEdgeSize: 0.1,
                     maxEdgeSize: 0.2,
@@ -25,7 +23,9 @@
             });
 
             s.bind('clickNode', function(e) {
-                console.log('node ' + e.data.node.id + ' was clicked')
+                scope.selectedNode = e.data.node.id;
+                scope.$apply();
+
             });
 
             scope.$watch('graph', function(newVal,oldVal) {
@@ -34,12 +34,6 @@
                     s.graph.clear();
                     s.graph.read(scope.graph);
                     s.refresh();
-                    //if(scope.releativeSizeNode) {
-                    //    //this feature needs the plugin to be added
-                    //    sigma.plugins.relativeSize(s, 2);
-                    //    console.log('relative size was triggered');
-                    //
-                    //}
                 }
             });
 
@@ -70,12 +64,13 @@
 				graph: '=',
 				width: '@',
 				height: '@',
+                selectedNode:'=',
 				releativeSizeNode: '='
 			}
-
 		};
 
 	};
+
 
     /**
      *
@@ -84,5 +79,4 @@
     angular
         .module('myApp')
         .directive('sigmaGraph', sigmaGraph)
-
 })();

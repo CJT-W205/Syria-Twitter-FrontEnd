@@ -2,6 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
 	<link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
   	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
@@ -9,19 +10,75 @@
 
 <body ng-controller="vizController">
 
-    <!--<div class="form-group col-sm-4">-->
-        <!--<label for="groupFilter">Include Groups: </label>-->
-            <!--<ui-select id="groupFilter" multiple ng-model="params.groups" theme="select2" style="width: 300px;" ng-click="updateData()">-->
-                <!--<ui-select-match placeholder="Select groups...">{{$item}}</ui-select-match>-->
-                <!--<ui-select-choices repeat="group in params.availableGroups | filter:$select.search">-->
-                  <!--{{group}}-->
-                <!--</ui-select-choices>-->
-            <!--</ui-select>-->
-    <!--</div>-->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+          <p class="navbar-brand">Syria Twitter User Network</p>
+          <p class="nav-small-red">Group Project for 'Storing & Retrieving Data', by Tom Kunicki, Charles Maalouf and Janak Mayer</p>
+      </div>
+
+    </nav>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-4">
+
+                <div class="well">
+                        <p>A few short explanatory sentences could go here</p>
+                        <p>A few short explanatory sentences could go here</p>
+                </div>
+
+                <div class="well">
+                    <form class="form-horizontal">
+
+                        <div class="form-group">
+                          <label for="hashtagFilter">Filter Users by Hashtags Used: </label>
+                          <ui-select id="hashtagFilter" multiple ng-model="params.hashtagSelected" theme="select2" ng-click="updateData()">
+                              <ui-select-match placeholder="Select hashtags...">{{$item}}</ui-select-match>
+                              <ui-select-choices repeat="hashtag in params.hashtagOptions | filter:$select.search">{{hashtag}}</ui-select-choices>
+                          </ui-select>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="minFollowers">Filter Users by Minimum Followers</label>
+                          <select id="minFollowers" class="form-control" data-ng-model="params.minFollowers" data-ng-options="opt for opt in params.minFollowerOptions"></select>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="groupFilter">Filter Users by ISIS Attitude Group: </label>
+                          <ui-select id="groupFilter" multiple ng-model="params.groupSelected" theme="select2" ng-click="updateData()">
+                              <ui-select-match placeholder="Select hashtags...">{{$item}}</ui-select-match>
+                              <ui-select-choices repeat="group in params.groupOptions | filter:$select.search">{{group}}</ui-select-choices>
+                          </ui-select>
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Apply Filters to Network</button>
+
+                    </form>
+                </div>
 
 
-    <sigma-graph graph="graph" width="100%" height="800px"></sigma-graph>
-    <!--<user-graph data="data"></user-graph>-->
+
+                <div class="well">
+
+                        <p>Clicked Node: <strong>{{selectedNode}}</strong></p>
+
+                        <p>Details on clicked user will go here... (fetched through separate API call, with node ID as param)</p>
+
+                        <p>We could include a bunch of user details, top x tweets from timeline, or whatever we want...</p>
+
+                </div>
+
+            </div>
+
+            <div class="col-sm-8">
+
+                <sigma-graph graph="graph" width="100%" height="800px" selected-node="selectedNode"></sigma-graph>
+
+            </div>
+
+        </div>
+    </div>
+
 
 
     <!-- Angular scripts-->

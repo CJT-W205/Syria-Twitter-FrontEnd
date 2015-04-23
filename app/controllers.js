@@ -2,71 +2,68 @@
 
     var vizController = function ($scope, SyriaTwitterAPI) {
 
-        $scope.giraph = {
-        "nodes": [
-        {
-          "id": "n0",
-          "label": "A node",
-          "x": 0,
-          "y": 0,
-          "size": 3
-        },
-        {
-          "id": "n1",
-          "label": "Another node",
-          "x": 3,
-          "y": 1,
-          "size": 2
-        },
-        {
-          "id": "n2",
-          "label": "And a last one",
-          "x": 1,
-          "y": 3,
-          "size": 1
-        }
-        ],
-        "edges": [
-        {
-          "id": "e0",
-          "source": "n0",
-          "target": "n1"
-        },
-        {
-          "id": "e1",
-          "source": "n1",
-          "target": "n2"
-        },
-        {
-          "id": "e2",
-          "source": "n2",
-          "target": "n0"
-        }
-        ]
-        };
+        $scope.selectedNode = null;
+        $scope.params = {}
 
+        $scope.params.minFollowerOptions = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850,
+            900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600, 1650, 1700, 1750, 1800, 1850, 1900, 1950, 2000];
+        $scope.params.minFollowers = 500;
 
+        $scope.params.hashtagOptions = [
+            'hashtag1',
+            'hashtag2',
+            'hashtag3',
+            'hashtag4',
+            'hashtag5',
+            'hashtag6',
+            'hashtag7',
+            'hashtag8',
+            'hashtag9',
+            'hashtag10'
+        ];
+        $scope.params.hashtagSelected = [
+            'hashtag1',
+            'hashtag2',
+            'hashtag3'
+        ];
+
+        $scope.params.groupOptions = [
+            'pro',
+            'anti',
+            'neutral',
+            'eng'
+        ];
+        $scope.params.groupSelected = [
+            'pro',
+            'anti',
+            'neutral',
+            'eng'
+        ];
 
     //    $scope.params = {};
     //    $scope.params.availableGroups = []
         $scope.getData = function () {
 
-            //SyriaTwitterAPI.graphGroups({
-            //}).success(function(response){
-            //
-            //    $scope.params.availableGroups = response.groups;
-            //    $scope.params.groups = response.groups;
+
 
             SyriaTwitterAPI.graphData({
-                "clusters": "to come later"
+                "min_followers": $scope.params.minFollowers,
+                "hashtags": $scope.params.hashtagSelected,
+                "isis_group": $scope.params.groupSelected
             }).success(function(response){
                 console.log(response);
                 $scope.graph = response;
+
 
             });
             //});
         };
         $scope.getData();
+
+
+
+
+
     //
     //    $scope.updateData = function () {
     //        SyriaTwitterAPI.graphData({
