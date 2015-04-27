@@ -25,7 +25,6 @@
             s.bind('clickNode', function(e) {
                 scope.selectedNode = e.data.node.id;
                 scope.$apply();
-
             });
 
             scope.$watch('graph', function(newVal,oldVal) {
