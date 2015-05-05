@@ -23,20 +23,7 @@
             <div class="col-sm-4">
 
                 <div class="well">
-                        <p>A few short explanatory sentences could go here</p>
-                        <p>A few short explanatory sentences could go here</p>
-                </div>
-
-                <div class="well">
                     <form class="form-horizontal">
-
-                        <div class="form-group">
-                          <label for="hashtagFilter">Filter Users by Hashtags Used: </label>
-                          <ui-select id="hashtagFilter" multiple ng-model="params.hashtagSelected" theme="select2" ng-click="updateData()">
-                              <ui-select-match placeholder="Select hashtags...">{{$item}}</ui-select-match>
-                              <ui-select-choices repeat="hashtag in params.hashtagOptions | filter:$select.search">{{hashtag}}</ui-select-choices>
-                          </ui-select>
-                        </div>
 
                         <div class="form-group">
                           <label for="minFollowers">Filter Users by Minimum Followers</label>
@@ -44,30 +31,44 @@
                         </div>
 
                         <div class="form-group">
-                          <label for="groupFilter">Filter Users by ISIS Attitude Group: </label>
-                          <ui-select id="groupFilter" multiple ng-model="params.groupSelected" theme="select2" ng-click="updateData()">
+                          <label for="isisFilter">Filter Users by ISIS Attitude:</label>
+                          <ui-select id="isisFilter" multiple ng-model="params.isisSelected" theme="select2" ng-click="updateData()" style="width: 100%;">
+                              <ui-select-match placeholder="Select ISIS orientation...">{{$item}}</ui-select-match>
+                              <ui-select-choices repeat="isis in params.isisOptions | filter:$select.search">{{isis}}</ui-select-choices>
+                          </ui-select>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="groupFilter">Filter Users by Cluster Group:</label>
+                          <ui-select id="groupFilter" multiple ng-model="params.groupSelected" theme="select2" ng-click="updateData()" style="width: 100%;">
                               <ui-select-match placeholder="Select hashtags...">{{$item}}</ui-select-match>
                               <ui-select-choices repeat="group in params.groupOptions | filter:$select.search">{{group}}</ui-select-choices>
                           </ui-select>
                         </div>
 
-                        <button type="submit" class="btn btn-default">Apply Filters to Network</button>
+                        <button type="submit" class="btn btn-default" ng-click="getData()">Apply Filters to Network</button>
 
                     </form>
                 </div>
 
-
-
                 <div class="well">
+                    <p>Click on a graph node to see user details below<p>
+                    <p><strong>Selected Node:</strong> {{selectedNode}}</p>
+                    <p><strong>Node in Cluster Group:</strong> {{selectedNodeGroup}}</p>
 
-                    <p>Clicked Node: <strong>{{selectedNode}}</strong></p>
-                    <p>User Name: {{userDetails.name}}</p>
-                    <p>Followers Count: {{userDetails.followers_count}}</p>
-                    <p>Following Count: {{userDetails.following_count}}</p>
+                    <p><strong>User Name:</strong> {{userDetails.name}}</p>
+                    <p><strong>Screen Name: </strong>{{userDetails.screen_name}}</p>
+                    <p><strong>ISIS Sentiment: </strong>{{userDetails.sentiment}}</p>
+                    <p><strong>Followers Count: </strong>{{userDetails.followers_count}}</p>
+                    <p><strong>Following Count: </strong>{{userDetails.following_count}}</p>
+                    <p><strong>URL: </strong><a href="{{userDetails.url}}">{{userDetails.url}}</a></p>
+                    <p><strong>Description: </strong>{{userDetails.desc}}</p>
+                    <p><strong>Location: </strong>{{userDetails.location}}</p>
+                    <p><strong>Top Hashtags:</strong></p>
+                    <ul>
+                        <li ng-repeat="tag in userDetails.tags">Hashtag: {{tag[0]}}, Frequency: {{tag[1]}}</li>
+                    </ul>
 
-                    <p>Details on clicked user will go here... (fetched through separate API call, with node ID as param)</p>
-
-                    <p>We could include a bunch of user details, top x tweets from timeline, or whatever we want...</p>
 
                 </div>
 
@@ -75,10 +76,21 @@
 
             <div class="col-sm-8">
 
-                <sigma-graph graph="graph" width="100%" height="800px" selected-node="selectedNode"></sigma-graph>
+                <sigma-graph graph="graph" width="100%" height="800px" selected-node="selectedNode" selected-node-group="selectedNodeGroup"></sigma-graph>
 
             </div>
 
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="well">
+                    <div class="form-group">
+                        <label for="clusterView">View Hashtag Wordcloud for a Cluster:</label>
+                        <select id="clusterView" class="form-control" data-ng-model="selectedNodeGroup" data-ng-options="opt for opt in params.clusterviewOptions"></select>
+                    </div>
+                    <img src="http://169.53.140.164:8000/word-cloud?isis_group=anti&group={{selectedNodeGroup}}" width="100%">
+                </div>
+            </div>
         </div>
     </div>
 

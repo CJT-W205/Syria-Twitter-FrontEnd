@@ -13,9 +13,9 @@
             var s = new sigma({
                 container: divId,
                 settings: {
-                    maxNodeSize:3,
+                    maxNodeSize:1,
                     minEdgeSize: 0.1,
-                    maxEdgeSize: 0.2,
+                    maxEdgeSize: 0.1,
                     zoomMax: 10,
                     zoomMin: .01
 
@@ -24,6 +24,7 @@
 
             s.bind('clickNode', function(e) {
                 scope.selectedNode = e.data.node.id;
+                scope.selectedNodeGroup = e.data.node.group;
                 scope.$apply();
             });
 
@@ -64,6 +65,7 @@
 				width: '@',
 				height: '@',
                 selectedNode:'=',
+                selectedNodeGroup:'=',
 				releativeSizeNode: '='
 			}
 		};
